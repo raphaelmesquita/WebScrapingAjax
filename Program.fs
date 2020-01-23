@@ -73,12 +73,13 @@ let main argv =
     browser.Navigate().GoToUrl("http://www14.fgv.br/fgvcatalogo20/carregaExcel.aspx?arquivo=Monitor1.0_IPCA_Ponta_012020A544318CC07EC13A9A46157C82CB61E7.XLS&catalogo=2012.1&item=2669&itemClicado=jan/20")
     waitUntil "ctl00_butExportar"
     browser.FindElementById("ctl00_butExportar").Click()
-    Thread.Sleep(1500)
+    Thread.Sleep(2000)
 
     browser.Navigate().GoToUrl("http://www14.fgv.br/fgvcatalogo20/carregaExcel.aspx?arquivo=Monitor1.0_IPCA_012020055DEAFC0EB083500DF0F53D0E151B6D.XLS&catalogo=2012.1&item=2663&itemClicado=jan/20")
     waitUntil "ctl00_butExportar"
     browser.FindElementById("ctl00_butExportar").Click()
-    Thread.Sleep(1500)
+    Thread.Sleep(2000)
 
-    printfn "%A" argv
+    browser.Quit()
+
     0 // return an integer exit code
