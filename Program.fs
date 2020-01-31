@@ -13,15 +13,17 @@ open OpenQA.Selenium.Support.UI
 //Thread.Sleep(100)
 //browser.FindElementById("treeList_R-2674019").FindElements(By.TagName("img")).First().Click()
 
+// https://www.browserstack.com/guide/wait-commands-in-selenium-webdriver
 let waitUntilId driver idString = 
     let wait = WebDriverWait(driver, TimeSpan.FromSeconds(30.));
-    wait.Until(fun w -> w.FindElement(By.Id(idString))) |> ignore
+    wait.PollingInterval <- TimeSpan.FromMilliseconds(200.)
+    let elem = wait.Until(fun w -> w.FindElement(By.Id(idString))) 
     Thread.Sleep(1500)
 
 [<EntryPoint>]
 let main argv =
     let chromeOptions = ChromeOptions()
-    chromeOptions.AddArguments("headless")
+    //chromeOptions.AddArguments("headless")
     chromeOptions.AddUserProfilePreference("download.default_directory", @"C:\temp\");
     use browser = new ChromeDriver(chromeOptions)
     
@@ -33,7 +35,7 @@ let main argv =
 
     let waitUntil = waitUntilId browser
 
-    browser.Navigate().GoToUrl("http://www14.fgv.br/autenticacao_produtos_licenciados/")
+    browser.Navigate().GoToUrl("https://www.google.com/flights#flt=/m/04jpl.SIN.2020-03-24*SIN./m/04jpl.2020-03-27;c:USD;e:1;sd:1;t:f")
     waitUntil "ctl00_content_btnAuth"
 
     browser.FindElementById("ctl00_content_txtLogin").SendKeys("SPACOV")
