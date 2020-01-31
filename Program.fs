@@ -6,6 +6,7 @@ open System.Threading
 open OpenQA.Selenium
 open OpenQA.Selenium.Chrome
 open OpenQA.Selenium.Support.UI
+open OpenQA.Selenium.Interactions
 
 //browser.FindElementById("treeList_U").FindElements(By.TagName("img")).First().Click()
 //Thread.Sleep(100)
@@ -23,15 +24,13 @@ let waitUntilId driver bySelector =
 
     let untilVisible (d: IWebDriver) =
         try
-            let elem = d.FindElement(bySelector)
-            elem.Displayed
+            d.FindElement(bySelector)
         with 
-            | :? NoSuchElementException -> false
-            | :? ElementNotVisibleException -> false
+            | :? NoSuchElementException -> Unchecked.defaultof<_>
+            | :? ElementNotVisibleException -> Unchecked.defaultof<_>
 
-    let isVisible = wait.Until(fun w -> untilVisible w)
-    Thread.Sleep(500)
-
+    wait.Until(fun w -> untilVisible w)
+    
 [<EntryPoint>]
 let main argv =
     let chromeOptions = ChromeOptions()
@@ -47,29 +46,138 @@ let main argv =
     
     let waitUntil = waitUntilId browser
 
-    browser.Navigate().GoToUrl("https://www.google.com/flights?gl=us&hl=en#flt=/m/04jpl.SIN.2020-03-16*SIN./m/04jpl.2020-03-20;c:USD;e:1;sd:1;t:f")
-    waitUntil <| byText "View price history"
-
-    browser.FindElementById("ctl00_content_txtLogin").SendKeys("SPACOV")
-    browser.FindElementById("ctl00_content_txtSenha").SendKeys("12Andrei")
-    browser.FindElementById("ctl00_content_btnAuth").Click()
-    waitUntil <| By.Id("ctl00_content_rptProduto_ctl00_hpkProduto")
-
-    browser.FindElementById("ctl00_content_rptProduto_ctl00_hpkProduto").Click()
-    waitUntil <| By.Id("frmRecadastra")
+    browser.Navigate().GoToUrl("https://www.google.com/flights?gl=us&hl=en#flt=/m/04jpl.SIN.2020-03-16.LHRSIN0QF2*SIN./m/04jpl.2020-03-20.SINLHR0QF1;c:USD;e:1;sd:1;t:b;sp:2.USD.69272*2.USD.69272")
+    waitUntil (byText "View price history") |> ignore
+    browser.FindElement(byText "View price history").Click()
+    let container = waitUntil (By.ClassName("gws-flights-savedflights__tooltip-container"))
     
-    browser.FindElementById("butRecadastrar").Click()
+    let interval = 300
+
+    let getAction() = Actions(browser)
+    Thread.Sleep(1000)
+    getAction().ClickAndHold().MoveToElement(container, 0, 0).Release().Build().Perform() |> ignore
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+    getAction().MoveByOffset(10, 0).Perform()
+    Thread.Sleep(interval)
+
+
+    //.gws-flights-savedflights__tooltip-container
+    //.gws-flights-savedflights__tooltip-text
+
+    //browser.FindElementById("ctl00_content_txtLogin").SendKeys("SPACOV")
+    //browser.FindElementById("ctl00_content_txtSenha").SendKeys("12Andrei")
+    //browser.FindElementById("ctl00_content_btnAuth").Click()
+    //waitUntil <| By.Id("ctl00_content_rptProduto_ctl00_hpkProduto")
+
+    //browser.FindElementById("ctl00_content_rptProduto_ctl00_hpkProduto").Click()
+    //waitUntil <| By.Id("frmRecadastra")
     
-    browser.Navigate().GoToUrl("http://www14.fgv.br/fgvcatalogo20/carregaExcel.aspx?arquivo=Monitor1.0_IPCA_Ponta_012020A544318CC07EC13A9A46157C82CB61E7.XLS&catalogo=2012.1&item=2669&itemClicado=jan/20")
-    waitUntil <| By.Id("ctl00_butExportar")
-    browser.FindElementById("ctl00_butExportar").Click()
-    Thread.Sleep(2000)
+    //browser.FindElementById("butRecadastrar").Click()
+    
+    //browser.Navigate().GoToUrl("http://www14.fgv.br/fgvcatalogo20/carregaExcel.aspx?arquivo=Monitor1.0_IPCA_Ponta_012020A544318CC07EC13A9A46157C82CB61E7.XLS&catalogo=2012.1&item=2669&itemClicado=jan/20")
+    //waitUntil <| By.Id("ctl00_butExportar")
+    //browser.FindElementById("ctl00_butExportar").Click()
+    //Thread.Sleep(2000)
 
-    browser.Navigate().GoToUrl("http://www14.fgv.br/fgvcatalogo20/carregaExcel.aspx?arquivo=Monitor1.0_IPCA_012020055DEAFC0EB083500DF0F53D0E151B6D.XLS&catalogo=2012.1&item=2663&itemClicado=jan/20")
-    waitUntil <| By.Id("ctl00_butExportar")
-    browser.FindElementById("ctl00_butExportar").Click()
-    Thread.Sleep(2000)
-
+    //browser.Navigate().GoToUrl("http://www14.fgv.br/fgvcatalogo20/carregaExcel.aspx?arquivo=Monitor1.0_IPCA_012020055DEAFC0EB083500DF0F53D0E151B6D.XLS&catalogo=2012.1&item=2663&itemClicado=jan/20")
+    //waitUntil <| By.Id("ctl00_butExportar")
+    //browser.FindElementById("ctl00_butExportar").Click()
+    
+    Thread.Sleep(3000)
     browser.Quit()
 
     0 // return an integer exit code
